@@ -1,0 +1,19 @@
+
+    print(attrless(5,data[0]),len(data[1])-1)
+    if len(data[0])>1:# So long as there are 2 attrbutes left to analyze
+        contin = True#-----------Start to see if all of the attributes lead to a result
+        for i in range(1,len(data[0])):
+            if data[0]!=data[i]:
+                contin=False
+        if contin==True:# if so, then it is optimal
+            print("this works for all the same")
+            return data
+        if contin==False:# If not, then go through all the 
+            print("Not all the same")
+            nd = []
+            for j in range(len(data)):
+                for i in range(len(data[j])-1):
+                    nc = attrless(i,data[j])
+                    #print(nc)
+                    nd.append(nc)
+            build_tree(nd)
