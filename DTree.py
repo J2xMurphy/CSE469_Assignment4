@@ -27,6 +27,14 @@ def config(args = "golf_processed.csv"):
 
 # Main function
 def execute():
+    global master
+    master = []
+    for i in range(len(input_data[0])):
+        tm = set()
+        for j in range(len(input_data)):
+            tm.add(input_data[j][i])
+        master.append(tm)
+    print(master)
     root = Node()
     build_tree(input_data)
     #print(input_data)
@@ -50,14 +58,32 @@ def build_tree(data):
     print("Building Tree")
     print(data)
     print("\n")
-    for i in range(len(data[0])-1):
-        g=fullattr(i,data)
-        print(g)
+    #for i in range(len(data[0])-1):
+    #    g=fullattr(i,data)
+    #    print(g)
+    find_gini(1,1,data)
+    find_gini(2,1,data)
+    find_gini(3,1,data)
+    #find_gini(1,2,data)
+    #find_gini(2,2,data)
+    #find_gini(3,2,data)
 # Find gini index of given attribute data and corresponding Labels
     # @param  att Attribute data
     # @param  lab Label data
     # @return gini index of an attribute
-#def find_gini(att, lab):
+def find_gini(att, lab, data):
+    countattr = 0
+    countlab = 0
+    abs = set()
+    for i in range(len(data)):
+        if data[i][len(data[i])-1]==lab:
+            countlab+=1
+        if data[i][0]==att:
+            countattr+=1
+            abs.add(data[i][len(data[i])-1])
+    print(str(countattr)+"/"+str(countlab))
+    print(abs)
+    return countlab
         # **-------------------Fill in here------------------------**/      
         # These steps might help you:
         #  - Find number of different values in attribute, number of different labels
